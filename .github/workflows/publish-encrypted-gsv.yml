@@ -1,0 +1,58 @@
+name: Publish encrypted GSV binary
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-encrypted-gsv.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconstruct-and-publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify encrypted artifact
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, hashlib
+
+          root = Path('gsv_encrypted')
+          names = [f'GSV_FULL_20260914.part{i:02d}.b64' for i in range(1, 10)]
+          names += ['GSV_FULL_20260914.part10a.b64', 'GSV_FULL_20260914.part10b.b64', 'GSV_FULL_20260914.part11.b64']
+
+          compact = ''.join(''.join((root / name).read_text().split()) for name in names)
+          if hashlib.sha256(compact.encode()).hexdigest() != '3ae9eb30b801cdd04597d0fa382a9ce094d03d03bb238bf721b0545fe462732a':
+              raise SystemExit('Base64 transport hash mismatch')
+
+          encrypted = base64.b64decode(compact, validate=True)
+          if len(encrypted) != 111821:
+              raise SystemExit(f'Encrypted size mismatch: {len(encrypted)}')
+          if hashlib.sha256(encrypted).hexdigest() != '2eebb5544067e54ab38ada97b82ddc40ee3462cb4f6b9aaa13a92e1398e9376c':
+              raise SystemExit('Encrypted SHA-256 mismatch')
+
+          out = root / 'GSV_FULL_20260914.zip.aes256gcm'
+          out.write_bytes(encrypted)
+          print('VERIFIED', out, len(encrypted), hashlib.sha256(encrypted).hexdigest())
+          PY
+
+      - name: Commit verified encrypted binary
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add gsv_encrypted/GSV_FULL_20260914.zip.aes256gcm
+          if git diff --cached --quiet; then
+            echo 'Binary already current.'
+            exit 0
+          fi
+          git commit -m 'Publish verified encrypted GSV corpus binary'
+          git push
