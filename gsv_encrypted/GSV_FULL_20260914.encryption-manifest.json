@@ -1,0 +1,33 @@
+{
+  "artifact": "GSV_FULL_20260914",
+  "publication_format": "chunked-base64 encrypted payload",
+  "encryption": "AES-256-GCM",
+  "format": "UDDENC1",
+  "layout": "magic[8] || nonce[12] || aesgcm_ciphertext_and_tag",
+  "aad": "UDD-UPP|GSV-FULL|2026-09-14|AES-256-GCM|v1",
+  "source_filename": "drive-download-20260914T030911Z-1-001.zip",
+  "source_size_bytes": 111785,
+  "source_sha256": "ae6eaf82dc8ec03dd4488fc74712c911a04b997a599b82311058efb15db3cc89",
+  "encrypted_binary_size_bytes": 111821,
+  "encrypted_binary_sha256": "2eebb5544067e54ab38ada97b82ddc40ee3462cb4f6b9aaa13a92e1398e9376c",
+  "part_count": 11,
+  "compact_base64_chars": 149096,
+  "compact_base64_sha256": "3ae9eb30b801cdd04597d0fa382a9ce094d03d03bb238bf721b0545fe462732a",
+  "parts": [
+    {"file":"GSV_FULL_20260914.part01.b64","chars":8000,"sha256":"0b8dfe138e7ef9cba8ebeb8f097d7f11bc376072bfa204baaebb6af39da9c2f9","git_blob_sha1":"37b27d66574fc0fe5110c36b99cb23936446a9e8"},
+    {"file":"GSV_FULL_20260914.part02.b64","chars":8000,"sha256":"d9b59ba085baf284deb1ad602b61eb32a2f5f0e84f38d632091e64ead1b19a28","git_blob_sha1":"fc3c1d9db3f165d37f15af9497e5f19533daa141"},
+    {"file":"GSV_FULL_20260914.part03.b64","chars":16000,"sha256":"6fda88eae522e1428bbc23264b0764a761c669cb9382ef27fd07b459e0e794e9","git_blob_sha1":"28dacc8c056928724bd4eb7f6b269e404d985fa3"},
+    {"file":"GSV_FULL_20260914.part04.b64","chars":16000,"sha256":"929c45ac1ee4998a8a07e1ed2703555740261832b5449cc7b0651819f06bcd70","git_blob_sha1":"bacb741439d8ffbe0bfde35b67502c7dde820ccc"},
+    {"file":"GSV_FULL_20260914.part05.b64","chars":16000,"sha256":"fb774ec1a3d74e67ee56908692a4add46657926dae50d22e4565033c0f93f5e4","git_blob_sha1":"b1828989fbbfee44b7ab2b97a9f986aab9daffe9"},
+    {"file":"GSV_FULL_20260914.part06.b64","chars":16000,"sha256":"09235c03abec52182b3aa77a607aa2af04c324383a53129cd4808a97a3d1bc32","git_blob_sha1":"673b0bcff4352b9d4e0dc43c0cb91a44dafaf1df"},
+    {"file":"GSV_FULL_20260914.part07.b64","chars":16000,"sha256":"bd7384d9556ffa5c29ba9100c92d4de2dc617f77d40f13fea1ad559a0f565121","git_blob_sha1":"341689a3c3d1ed877e31d130f9eb4467fe1d2112"},
+    {"file":"GSV_FULL_20260914.part08.b64","chars":16000,"sha256":"22e1212cf4a6349e64f88f4a6fcbecb6a4a8d72daa9ae31b0834f62ffc106e44","git_blob_sha1":"f622328df7cff6146a8d508d31821c81a34d9e51"},
+    {"file":"GSV_FULL_20260914.part09.b64","chars":16000,"sha256":"692a9d37b9d6e4963c84ce2023cb8053ff2f3c7c9fe5b565c3726bd04cde7ee4","git_blob_sha1":"8582b11eb4605375b2917fb4149a72d7ea9dacbd"},
+    {"file":"GSV_FULL_20260914.part10.b64","chars":16000,"sha256":"1d683528217a66722cf12b508f3bed235eb8cf566efbe3875ff893d797784c4e","git_blob_sha1":"0d0fcb1cba6aac8e255b87dcbbd6b091e6c82c31"},
+    {"file":"GSV_FULL_20260914.part11.b64","chars":5096,"sha256":"ab8dbade855f4189763b564cd85947b504f408eb3ba4507c8deb3dac9ae5a78d","git_blob_sha1":"b18722998612fbcaffdfb411770c258e7e3a95d4"}
+  ],
+  "reassembly": "Concatenate parts 01..11 in lexical order, remove ASCII whitespace, Base64-decode, then decrypt with AES-256-GCM using the supplied key and AAD.",
+  "key_material": "NOT_STORED",
+  "key_source": "user-supplied; retained out-of-repository",
+  "local_roundtrip_verification": "PASS"
+}
